@@ -8,7 +8,6 @@ export * from "./authControllers/changePassword";
 export * from "./usersControllers/getAllUsers";
 export * from "./usersControllers/getLoggedUser";
 export * from "./usersControllers/updateProfile";
-export * from "./usersControllers/getUserById";
 
 export * from "./usersControllers/changeEmail";
 export * from "./usersControllers/deleteAccount";

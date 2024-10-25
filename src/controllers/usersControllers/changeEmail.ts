@@ -1,6 +1,6 @@
 import { NextFunction, Response, Request } from "express";
 import { User } from "../../models";
-import { changeEmailValidator } from "../../validators/authValidator";
+import { changeEmailValidator } from "../../validators/authValidator/changeEmailValidator";
 
 import bcrypt from "bcrypt";
 

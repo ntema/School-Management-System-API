@@ -71,7 +71,14 @@ const UserSchema = new mongoose.Schema(
     },
     validIdURL: {
       type: String
-    }
+    },
+    pictureMedia: {
+      type: Object,
+      select: false
+    },
+    pictureURL: {
+      type: String
+    },
   },
   {
     timestamps: true

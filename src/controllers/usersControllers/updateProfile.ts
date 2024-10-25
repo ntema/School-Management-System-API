@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 
 import { User } from "../../models";
-import { updateProfileValidator } from "../../validators/authValidator";
+import { updateProfileValidator } from "../../validators/userValidators/updateProfileValidator";
 
 export const updateProfile = async (
   req: Request,

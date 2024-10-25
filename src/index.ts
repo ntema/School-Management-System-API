@@ -6,28 +6,17 @@ import {
 import dotenv from "dotenv";
 import { connect } from "mongoose";
 import { constants } from "./config";
-import { Server } from "socket.io";
-import { createServer } from "http";
-
-
-
-
 import cors from "cors";
 dotenv.config();
 
 const app: express.Application = express();
-const server = createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: ["http://localhost:5001"],
-    methods: ["GET", "POST", "PATCH"]
-  }
-});
-
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: "*",
+    methods: ["GET", "POST", "PATCH", "DELETE"],
+  }));
 
 const db: string = constants.mongoURI;
 connect(db, {})
@@ -59,6 +48,6 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
 
 const PORT = process.env.PORT || 5001;
 
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log("App is running at port 5001");
 });

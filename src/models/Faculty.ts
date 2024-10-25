@@ -19,7 +19,7 @@ const facultySchema = new Schema(
 );
 function populateDepartment(next: any) {
   //@ts-ignore
-  this.populate("faculty");
+  this.populate("department");
   //@ts-ignore
   next();
 }
@@ -29,7 +29,7 @@ facultySchema.pre("find", populateDepartment)
   .pre("findOneAndUpdate", populateDepartment);
   
 export const Faculty = mongoose.model(
-  "department",
+  "faculty",
   facultySchema
 );
 

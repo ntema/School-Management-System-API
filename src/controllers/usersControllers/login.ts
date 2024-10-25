@@ -1,8 +1,6 @@
 import { NextFunction, Response, Request } from "express";
 import { User } from "../../models";
 import { loginValidator } from "../../validators/authValidator";
-import jwt from "jsonwebtoken";
-import { constants } from "../../config";
 import bcrypt from "bcrypt";
 
 export const login = async (
@@ -27,13 +25,8 @@ export const login = async (
       return res.status(400).json({
         error: {
           status: "fail",
-          message: "Invalid username/password combination"
+          message: "Invalid credentials"
         }
-      });
-    }
-    if (!user.isActivated) {
-      return res.status(400).json({
-        error: { message: "Your Account is not yet verified by management" }
       });
     }
 
@@ -42,22 +35,15 @@ export const login = async (
       return res.status(400).json({
         error: {
           status: "fail",
-          message: "Invalid username/password combination"
+          message: "Invalid credentials"
         }
       });
     }
-    const token = jwt.sign({ _id: user._id }, constants.USER_TOKEN_SECRET, {
-      expiresIn: constants.TOKEN_EXPIRATION_TIME
-    });
-    const refreshToken = jwt.sign(
-      { _id: user._id },
-      constants.REFRESH_TOKEN_SECRET,
-      { expiresIn: "14d" }
-    );
+    
 
     return res.status(200).json({
       ststus: "success",
-      data: { token, type: "bearer", refreshToken, user }
+      data: { user }
     });
   } catch (error) {
     console.log(error);

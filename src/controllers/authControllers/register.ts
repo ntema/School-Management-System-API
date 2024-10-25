@@ -1,8 +1,6 @@
 import { NextFunction, Response, Request } from "express";
 import { User } from "../../models";
 import { registerValidator } from "../../validators/authValidator";
-import jwt from "jsonwebtoken";
-import { constants } from "../../config";
 import bcrypt from "bcrypt";
 
 export const register = async (
@@ -30,22 +28,10 @@ export const register = async (
     value.password = await bcrypt.hash(value.password, 12);
     const user = await User.create(value);
 
-    const token = jwt.sign(
-      { _id: user._id, role: user.role },
-      constants.USER_TOKEN_SECRET,
-      {
-        expiresIn: constants.TOKEN_EXPIRATION_TIME
-      }
-    );
-    const refreshToken = jwt.sign(
-      { _id: user._id, role: user.role },
-      constants.REFRESH_TOKEN_SECRET,
-      { expiresIn: "14d" }
-    );
 
     return res.status(200).json({
       status: "success",
-      data: { token, type: "bearer", refreshToken, user }
+      data: { user }
     });
   } catch (error) {
     console.log(error);
