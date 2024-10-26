@@ -1,11 +1,10 @@
 import { Router } from "express";
 
-import { faculty,addDepartment } from "../controllers";
+import {addDepartment, getAllDeparment } from "../controllers";
 
 const router = Router();
 
-router.post("/login", login);
-router.post("/register", register);
-router.patch("/change-password", changePassword);
+router.post("/creat_department", addDepartment);
+router.post("/get_all_dept", getAllDeparment);
 
 export const authRouter = router;

@@ -15,5 +15,6 @@ export * from "./usersControllers/deleteAccount";
 
 export * from "./departmentController/getAllDeparment";
 export * from "./departmentController/addDepartment";
-
+export * from "./facultyController/addFaculty";
+export * from "./facultyController/getAllFaculty";
 
