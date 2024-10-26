@@ -1,54 +1,31 @@
-import mongoose, { Schema } from "mongoose";
+// import { Document, Schema } from "mongoose";
 
-const LecturesSchema = new Schema(
-  {
-    uploadedBy: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true
-    },
-    imagesURLs: {
-      type: [String]
-    },
-    videoMedia: {
-      type: Object,
-      select: false
-    },
-    videoURL: {
-      type: Object,
-      select: false
-    },
-    department: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Department",
-      required: [true, "Department is required"],
-    },
-    level: {
-      type: Number,
-      required: [true, "Level is required"],
-    },
-    filename: {
-      type: String,
-      required: [true, "Name is required"],
-    },
-    
+const mongoose = require("mongoose");
+
+const LectureSchema = new mongoose.Schema({
+  course: {
+    type: String,
+    required: true,
   },
-  {
-    timestamps: true
-  }
-);
-function populateLectures(next: any) {
-  //@ts-ignore
-  this.populate("uploadedBy").populate("department");
-  //@ts-ignore
-  next();
-}
+  lecturer: {
+     type: String,
+    required: true,
+  },
+  duration: {
+    type: String,
+    required: true,
+  },
+  level: {
+    type: String,
+    required: true,
+  },
+  department: {
+    type: String,
+    required: true,
+  },
+});
 
-LecturesSchema.pre("find", populateLectures)
-  .pre("findOne", populateLectures)
-  .pre("findOneAndUpdate", populateLectures);
-  
-export const Lectures = mongoose.model(
+export const Lecture = mongoose.model(
   "Lectures",
-  LecturesSchema
+  LectureSchema
 );
