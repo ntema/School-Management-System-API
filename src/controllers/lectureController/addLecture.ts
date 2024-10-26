@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from "express";
 import { Lecture } from "../../models";
 import { addLectureValidation } from "../../validators/lectureValidation/addLectureValidation";
 
-export const addFaculty = async (
+export const addLecture = async (
   req: Request,
   res: Response,
   next: NextFunction

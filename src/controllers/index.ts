@@ -17,4 +17,6 @@ export * from "./departmentController/getAllDeparment";
 export * from "./departmentController/addDepartment";
 export * from "./facultyController/addFaculty";
 export * from "./facultyController/getAllFaculty";
+export * from "./lectureController/addLecture";
+export * from "./materialController/addLectureMaterial";
 
